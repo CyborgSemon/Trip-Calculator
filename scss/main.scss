@@ -1,0 +1,520 @@
+$primary: #2B2544;
+$background: #1D1831;
+$secondary: #E52562;
+$actionColor: #43396A;
+$textColor: #FFFFFF;
+$snackBarColor: #170312;
+
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Roboto', sans-serif;
+}
+
+/* Fix for google maps api making all h tags have bolder text */
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal !important;
+}
+
+body {
+	background-color: $background;
+	overflow: hidden;
+}
+
+input {
+	outline: none;
+	border: 2px solid transparent;
+	padding: 8px 12px;
+	border-radius: 8px;
+	width: 100%;
+	font-size: 1.2em;
+	color: $textColor;
+	background-color: $actionColor;
+	&::placeholder {
+		color: rgba($textColor, 0.6);
+	}
+}
+
+#backBtn {
+	z-index: 10;
+	display: none;
+	position: absolute;
+	top: 1.1rem;
+	left: 1.1rem;
+	color: $secondary;
+	align-items: center;
+	font-size: 2em;
+	cursor: pointer;
+	padding: 12px;
+	img {
+		width: 36px;
+		margin-right: 8px;
+	}
+	&:hover {
+		opacity: 0.8;
+	}
+}
+
+
+/*
+==================================
+	      Form Section
+==================================
+*/
+
+#formContainer {
+	position: absolute;
+	z-index: 6;
+	top: 50%;
+	left: 5%;
+	transform: translateY(-50%);
+	width: 40%;
+	border-radius: 34px;
+	background-color: $primary;
+	color: $textColor;
+	padding: 24px 76px;
+	display: flex;
+	flex-direction: column;
+	&.active {
+		left: -50%;
+	}
+	h2 {
+		text-align: center;
+	}
+	.inputContainer {
+		border-radius: 8px;
+		margin-top: 16px;
+		transition: 0.3s;
+	}
+	.disabled {
+		opacity: 0.6;
+		.vehicleBtn {
+			transition: 0.5s;
+			cursor: default;
+		}
+	}
+	.inputLabel {
+		margin-bottom: 12px;
+	}
+	.formSplit {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		> div {
+			width: 49%;
+		}
+	}
+	.vehicles {
+		display: flex;
+		justify-content: center;
+	}
+	.vehicleBtn {
+		margin: 0 auto;
+		width: 90px;
+		height: 90px;
+		border-radius: 12px;
+		background-color: $actionColor;
+		cursor: pointer;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		img {
+			width: 64px;
+		}
+	}
+
+	#noCars {
+		height: 90px;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		opacity: 0.5;
+		display: none;
+		text-align: center;
+	}
+
+	#submitBtn {
+		outline: none;
+		margin: 32px auto 0 auto;
+		color: $textColor;
+		padding: 8px 24px;
+		border-radius: 12px;
+		background-color: $secondary;
+		border: none;
+		text-align: center;
+		box-shadow: 0 8px 20px rgba($secondary, 0.4);
+		font-size: 1.2em;
+		cursor: pointer;
+		transition: 0.5s;
+		&:not(.disabled):hover {
+			box-shadow: 0 8px 20px rgba($secondary, 0.8);
+		}
+		&.disabled {
+			cursor: default;
+		}
+	}
+}
+
+.selected {
+	border: 2px solid $secondary;
+}
+
+
+/*
+==================================
+	   	   Map Section
+==================================
+*/
+
+#mapContainer {
+	position: absolute;
+	z-index: 6;
+	top: 50%;
+	left: 150vw;
+	transform: translate(0, -50%);
+	width: 40%;
+	border-radius: 35px;
+	background-color: $primary;
+	color: $textColor;
+	border: 2px solid $textColor;
+	max-height: 95vh;
+	&.active {
+		left: 50%;
+	}
+	.infoArea {
+		display: flex;
+		justify-content: space-around;
+		padding: 16px 16px 8px 16px;
+		.info {
+			text-align: center;
+			span {
+				display: block;
+				&:first-child {
+					font-size: 1.4em;
+				}
+				&:last-child {
+					font-size: 2em;
+				}
+			}
+		}
+	}
+	#map {
+		height: 400px;
+		width: 100%;
+	}
+	#directions {
+		overflow: hidden;
+		height: 40px;
+		&.open {
+			height: 100%;
+		}
+		#directionsBtn {
+			height: 40px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			cursor: pointer
+		}
+		#directionsInfo {
+			transition: 2s ease;
+			border-bottom-right-radius: 34px;
+			border-bottom-left-radius: 34px;
+			max-height: 0;
+			overflow-y: scroll;
+			&.open {
+				max-height: 180px;
+			}
+			.adp, .adp-substep {
+				color: $textColor !important;
+			}
+			table.adp-directions {
+				width: 100%;
+			}
+			.adp-directions > tbody > tr > td:first-child {
+				display: none;
+			}
+		}
+	}
+}
+
+
+/*
+==================================
+	   Background Animation
+==================================
+*/
+
+#backgroundDiv {
+	position: absolute;
+	z-index: 1;
+	top: 50%;
+	left: 50%;
+	transform: translateY(-50%);
+	width: 100vw;
+	height: 300px;
+	display: flex;
+	align-items: flex-end;
+	&.active {
+		left: 0;
+	}
+	#car {
+		position: absolute;
+		z-index: 5;
+		width: 200px;
+		height: 200px;
+		display: flex;
+		align-items: flex-end;
+		margin-bottom: 5px;
+		left: 3%;
+		&.active {
+			left: 13%;
+		}
+		img {
+			width: 75%;
+			max-height: 200px;
+		}
+	}
+	#forGround {
+		position: absolute;
+		background: url('../images/forGround.png') repeat-x 0 0;
+		z-index: 4;
+		height: 250px;
+		width: 100%;
+	}
+	#midGround {
+		position: absolute;
+		background: url('../images/midGround.png') repeat-x 0 0;
+		z-index: 3;
+		height: 300px;
+		width: 100%;
+	}
+	#backGround {
+		position: absolute;
+		background: url('../images/backGround.png') repeat-x 0 0;
+		z-index: 2;
+		height: 300px;
+		width: 100%;
+	}
+}
+
+@media screen and (min-width: 1350px) {
+	#formContainer {
+		font-size: 1.4em;
+	}
+}
+
+@media screen and (max-width: 1350px) {
+	#formContainer {
+		padding: 32px;
+		border-radius: 26px;
+	}
+}
+
+@media screen and (min-width: 1150px) {
+	#mapContainer.active {
+		left: 55%;
+	}
+}
+
+@media screen and (max-width: 1150px) {
+	input {
+		padding: 4px 6px;
+		border-radius: 6px;
+		border-width: 1px;
+		font-size: 0.95em;
+	}
+
+	#formContainer {
+		padding: 20px;
+		border-radius: 20px;
+		top: 10px;
+		margin: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 96%;
+		.inputLabel {
+			margin-bottom: 6px;
+		}
+	}
+	#mapContainer {
+		border-radius: 20px;
+		top: 10px;
+		margin: 0;
+		transform: translateX(-50%);
+		width: 96%;
+		&.active {
+			left: 50%;
+		}
+		#map {
+			height: 300px;
+		}
+		.infoArea {
+			display: flex;
+			justify-content: space-around;
+			padding: 8px;
+			.info {
+				span {
+					&:first-child {
+						font-size: 1.1em;
+					}
+					&:last-child {
+						font-size: 1.5em;
+					}
+				}
+			}
+		}
+	}
+
+	#directionsInfo {
+		border-bottom-right-radius: 20px !important;
+		border-bottom-left-radius: 20px !important;
+	}
+
+	.selected {
+		border-width: 1px;
+	}
+
+	#backgroundDiv {
+		bottom: 10px;
+		top: auto;
+		left: auto;
+		transform: none;
+		#car {
+			left: 20%;
+			&.active {
+				left: 20%;
+			}
+		}
+	}
+	#backBtn {
+		img {
+			width: 24px;
+			margin-left: 8px;
+		}
+		#backBtnText {
+			display: none;
+		}
+	}
+
+
+}
+
+@media screen and (max-width: 650px) {
+	#formContainer {
+		font-size: 0.8em;
+		.vehicleBtn {
+			width: 70px;
+			height: 70px;
+			img {
+				width: 60%;
+			}
+		}
+	}
+}
+
+
+/*
+==================================
+		  Snack bar CSS
+==================================
+*/
+
+.snackbar-container {
+	transition: all 500ms ease;
+	transition-property: top, right, bottom, left, opacity;
+	font-size: 14px;
+	min-height: 14px;
+	background-color: $snackBarColor !important;
+	position: fixed;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	color: $textColor !important;
+	line-height: 22px;
+	padding: 16px 24px;
+	bottom: -100px;
+	top: -100px;
+	opacity: 0;
+	z-index: 9999;
+	border-radius: 12px !important;
+	.action {
+		outline: none;
+		background: inherit;
+		display: inline-block;
+		border: none;
+		font-size: inherit;
+		text-transform: uppercase;
+		color: $secondary !important;
+		margin: 0 0 0 24px;
+		padding: 4px;
+		min-width: min-content;
+		cursor: pointer;
+	}
+}
+
+@media (min-width: 640px) {
+	.snackbar-container {
+		min-width: 288px;
+		max-width: 568px;
+		display: inline-flex;
+		border-radius: 6px;
+		margin: 24px;
+	}
+}
+
+@media (max-width: 640px) {
+	.snackbar-container {
+		left: 0;
+		right: 0;
+		width: 100%;
+	}
+}
+
+.snackbar-pos.bottom-center {
+	top: auto !important;
+	bottom: 0;
+	left: 50%;
+	transform: translate(-50%, 0);
+}
+
+.snackbar-pos.bottom-left {
+	top: auto !important;
+	bottom: 0;
+	left: 0;
+}
+
+.snackbar-pos.bottom-right {
+	top: auto !important;
+	bottom: 0;
+	right: 0;
+}
+
+.snackbar-pos.top-left {
+	bottom: auto !important;
+	top: 0;
+	left: 0;
+}
+
+.snackbar-pos.top-center {
+	bottom: auto !important;
+	top: 0;
+	left: 50%;
+	transform: translate(-50%, 0);
+}
+
+.snackbar-pos.top-right {
+	bottom: auto !important;
+	top: 0;
+	right: 0;
+}
+
+@media (max-width: 640px) {
+	.snackbar-pos.bottom-center, .snackbar-pos.top-center {
+		left: 0;
+		transform: none;
+		border-radius: 0 !important;
+	}
+}

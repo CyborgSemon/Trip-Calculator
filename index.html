@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+		<link href="css/main.css" rel="stylesheet">
+		<title>Trip Calculator</title>
+	</head>
+	<body>
+
+		<div id="backBtn">
+			<img src="images/backArrow.svg" alt="Back arrow icon">
+			<span id="backBtnText">Back</span>
+		</div>
+
+		<div id="formContainer">
+			<h2>Trip Calculator</h2>
+			<div class="inputContainer">
+				<h3 class="inputLabel">Start Location:</h3>
+				<input id="startLocation" type="text" placeholder="">
+			</div>
+			<div class="inputContainer disabled">
+				<h3 class="inputLabel">End Location:</h3>
+				<input id="endLocation" type="text" placeholder="" disabled>
+			</div>
+			<div class="formSplit">
+				<div class="inputContainer disabled">
+					<h3 class="inputLabel">People:</h3>
+					<input id="people" type="number" min="1" disabled>
+				</div>
+				<div class="inputContainer disabled">
+					<h3 class="inputLabel">Days:</h3>
+					<input id="days" type="number" min="1" disabled>
+				</div>
+			</div>
+			<div id="vehiclesContainer" class="inputContainer disabled">
+				<h3 class="inputLabel">Vehicles:</h3>
+				<div class="vehicles">
+					<div class="vehicleBtn" data-vehicle-id="0">
+						<img src="images/bikeSimpleWhite.svg" alt="SVG of a moter bike">
+					</div>
+					<div class="vehicleBtn" data-vehicle-id="1">
+						<img src="images/smallCarWhite.svg" alt="SVG of a moter bike">
+					</div>
+					<div class="vehicleBtn" data-vehicle-id="2">
+						<img src="images/bigCarWhite.svg" alt="SVG of a moter bike">
+					</div>
+					<div class="vehicleBtn" data-vehicle-id="3">
+						<img src="images/moterHomeWhite.svg" alt="SVG of a moter bike">
+					</div>
+					<div id="noCars">
+						There are currently no vehicles available
+					</div>
+				</div>
+			</div>
+			<button id="submitBtn" class="disabled" disabled>Calculate</button>
+		</div>
+
+		<div id="mapContainer">
+			<div class="infoArea">
+				<div class="info">
+					<span>Travel Time</span>
+					<span id="time">0</span>
+				</div>
+				<div class="info">
+					<span>Travel Distance</span>
+					<span id="distance">0km</span>
+				</div>
+				<div class="info">
+					<span>Total Cost</span>
+					<span id="cost">$0</span>
+				</div>
+			</div>
+			<div id="map"></div>
+			<div id="directions">
+				<div id="directionsBtn">
+					Directions
+				</div>
+				<div id="directionsInfo">
+				</div>
+			</div>
+		</div>
+
+		<div id="backgroundDiv">
+			<div id="backGround"></div>
+			<div id="midGround"></div>
+			<div id="forGround"></div>
+			<div id="car">
+				<img id="vehicleImage" src="images/questionMark.svg" alt="Vehicle image">
+			</div>
+		</div>
+
+		<script src="https://maps.googleapis.com/maps/api/js?key=KEY&libraries=places"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="js/snackbar.min.js"></script>
+		<script src="js/main.js"></script>
+	</body>
+</html>
