@@ -1,0 +1,5 @@
+# Trip Calculator
+
+For this project I was tasked to create a single page JavaScript appellation of a trip calculator that utilised the Google Maps API. For this application I was given a data set of vehicles and their relevant data on hire time, amount of people and fuel efficiency. Then using the Google Maps API, I then had to calculate the total fuel cost for the distance traveled. For a challenge, I also decided to work on an aspect of web development that I had never tried before, and that was animation. In this application, when you input all of your data and click the submit, the vehicle you chose and the background will start animating to make it look like the car is driving.
+
+You can view the project live here [https://cyborgsemon.github.io/Trip-Calculator/](https://cyborgsemon.github.io/Trip-Calculator/)
