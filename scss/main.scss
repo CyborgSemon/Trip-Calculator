@@ -517,4 +517,13 @@ input {
 		transform: none;
 		border-radius: 0 !important;
 	}
+
+	#formContainer, #mapContainer {
+		top: 60px;
+	}
+
+	#backBtn {
+		top: 0.5rem;
+		left: 0.5rem;
+	}
 }
